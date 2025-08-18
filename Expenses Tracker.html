@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Expense Tracker</title>
+    <!-- Use the Inter font from Google Fonts for a modern look -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <!-- Load Tailwind CSS from the CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e5e7eb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 4px;
+        }
+        /* Custom styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 24px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 md:p-8">
+    <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <header class="text-center mb-6 md:mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Your Expense Tracker</h1>
+        </header>
+
+        <!-- Summary Section -->
+        <div class="mb-6 md:mb-8 bg-blue-100 rounded-lg p-4 text-center">
+            <h2 class="text-xl font-semibold text-blue-800">Total Expenses</h2>
+            <p id="total-expenses" class="text-3xl font-bold text-blue-600 mt-2">$0.00</p>
+        </div>
+
+        <!-- Add Expense Form Section -->
+        <section class="mb-6 md:mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Add a New Expense</h2>
+            <form id="add-expense-form" class="space-y-4">
+                <input type="text" id="description" placeholder="Description (e.g., Coffee, Groceries)" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                
+                <input type="number" id="amount" placeholder="Amount (e.g., 5.50)" step="0.01" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                
+                <select id="category" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                    <option value="" disabled selected>Select a Category</option>
+                    <option value="Food">Food</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Other">Other</option>
+                </select>
+                
+                <button type="submit"
+                        class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
+                    Add Expense
+                </button>
+            </form>
+        </section>
+
+        <!-- Expense List Section -->
+        <section>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Expense History</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                    <thead class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+                        <tr>
+                            <th class="py-3 px-6 text-left">Description</th>
+                            <th class="py-3 px-6 text-left">Amount</th>
+                            <th class="py-3 px-6 text-left">Category</th>
+                            <th class="py-3 px-6 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expense-list" class="text-gray-600 text-sm font-light">
+                        <!-- Expense rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <p id="no-expenses-message" class="text-center text-gray-500 mt-4 hidden">
+                No expenses added yet.
+            </p>
+        </section>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Edit Expense</h3>
+            <form id="edit-form" class="space-y-4">
+                <input type="hidden" id="edit-id">
+                <input type="text" id="edit-description" placeholder="Description" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="number" id="edit-amount" placeholder="Amount" step="0.01" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="edit-category" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                    <option value="Food">Food</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" id="cancel-edit" class="bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-200">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-200">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get references to key HTML elements
+        const form = document.getElementById('add-expense-form');
+        const expenseList = document.getElementById('expense-list');
+        const totalExpensesDisplay = document.getElementById('total-expenses');
+        const noExpensesMessage = document.getElementById('no-expenses-message');
+        const editModal = document.getElementById('edit-modal');
+        const editForm = document.getElementById('edit-form');
+        const cancelEditButton = document.getElementById('cancel-edit');
+        const editIdInput = document.getElementById('edit-id');
+        const editDescriptionInput = document.getElementById('edit-description');
+        const editAmountInput = document.getElementById('edit-amount');
+        const editCategoryInput = document.getElementById('edit-category');
+
+        // This array will hold all the expense objects
+        let expenses = [];
+
+        /**
+         * Saves the current expenses array to localStorage.
+         */
+        function saveExpenses() {
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+        }
+
+        /**
+         * Loads expenses from localStorage on page load.
+         */
+        function loadExpenses() {
+            const savedExpenses = localStorage.getItem('expenses');
+            if (savedExpenses) {
+                expenses = JSON.parse(savedExpenses);
+            }
+        }
+
+        /**
+         * Renders the expenses list and updates the total amount.
+         */
+        function renderExpenses() {
+            // Clear the existing content
+            expenseList.innerHTML = '';
+            
+            // Calculate the total of all expenses
+            const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            
+            // Update the total expenses display with 2 decimal places
+            totalExpensesDisplay.textContent = `$${total.toFixed(2)}`;
+            
+            // Check if there are any expenses to display
+            if (expenses.length === 0) {
+                noExpensesMessage.classList.remove('hidden');
+            } else {
+                noExpensesMessage.classList.add('hidden');
+                
+                // Loop through the expenses array and create a table row for each
+                expenses.forEach((expense, index) => {
+                    const row = document.createElement('tr');
+                    row.classList.add('border-b', 'border-gray-200', 'hover:bg-gray-100');
+                    row.setAttribute('data-id', index);
+                    
+                    row.innerHTML = `
+                        <td class="py-3 px-6 whitespace-nowrap">${expense.description}</td>
+                        <td class="py-3 px-6 whitespace-nowrap">$${expense.amount.toFixed(2)}</td>
+                        <td class="py-3 px-6 whitespace-nowrap">${expense.category}</td>
+                        <td class="py-3 px-6 text-center whitespace-nowrap">
+                            <button class="edit-btn text-blue-600 hover:text-blue-800 transition duration-200 mr-2">
+                                Edit
+                            </button>
+                            <button class="delete-btn text-red-600 hover:text-red-800 transition duration-200">
+                                Delete
+                            </button>
+                        </td>
+                    `;
+                    
+                    expenseList.appendChild(row);
+                });
+            }
+        }
+
+        /**
+         * Handles the form submission to add a new expense.
+         * @param {Event} event The form submission event.
+         */
+        function addExpense(event) {
+            event.preventDefault();
+
+            const description = document.getElementById('description').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const category = document.getElementById('category').value;
+            
+            if (!description || isNaN(amount) || amount <= 0 || !category) {
+                console.error('Invalid input: Please fill out all fields correctly.');
+                return;
+            }
+
+            const newExpense = {
+                description: description,
+                amount: amount,
+                category: category
+            };
+
+            expenses.push(newExpense);
+            saveExpenses(); // Save to localStorage
+            renderExpenses(); // Render the updated list
+            form.reset(); // Reset the form
+        }
+
+        /**
+         * Handles the form submission for editing an expense.
+         * @param {Event} event The form submission event.
+         */
+        function updateExpense(event) {
+            event.preventDefault();
+
+            const id = parseInt(editIdInput.value, 10);
+            const description = editDescriptionInput.value;
+            const amount = parseFloat(editAmountInput.value);
+            const category = editCategoryInput.value;
+
+            if (!description || isNaN(amount) || amount <= 0 || !category) {
+                console.error('Invalid input: Please fill out all fields correctly.');
+                return;
+            }
+
+            expenses[id] = { description, amount, category };
+            saveExpenses();
+            renderExpenses();
+            editModal.style.display = 'none'; // Hide the modal
+        }
+
+        /**
+         * Deletes an expense from the list.
+         * @param {number} id The index of the expense to delete.
+         */
+        function deleteExpense(id) {
+            expenses.splice(id, 1);
+            saveExpenses();
+            renderExpenses();
+        }
+
+        // Add event listener to the main form
+        form.addEventListener('submit', addExpense);
+
+        // Use event delegation for the edit and delete buttons
+        expenseList.addEventListener('click', (event) => {
+            const row = event.target.closest('tr');
+            if (!row) return;
+
+            const id = parseInt(row.dataset.id, 10);
+
+            if (event.target.classList.contains('edit-btn')) {
+                // Show the edit modal and populate the form with data
+                const expenseToEdit = expenses[id];
+                editIdInput.value = id;
+                editDescriptionInput.value = expenseToEdit.description;
+                editAmountInput.value = expenseToEdit.amount;
+                editCategoryInput.value = expenseToEdit.category;
+                editModal.style.display = 'flex'; // Show the modal
+            } else if (event.target.classList.contains('delete-btn')) {
+                // Confirm and delete the expense
+                deleteExpense(id);
+            }
+        });
+
+        // Add event listener to the edit form and cancel button
+        editForm.addEventListener('submit', updateExpense);
+        cancelEditButton.addEventListener('click', () => {
+            editModal.style.display = 'none';
+        });
+
+        // Initial setup on page load
+        loadExpenses();
+        renderExpenses();
+    </script>
+</body>
+</html>
