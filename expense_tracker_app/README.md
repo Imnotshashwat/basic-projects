@@ -1,7 +1,9 @@
 # 💸 Expense Tracker
 
-Welcome! This is a colorful and user-friendly web app to help you track expenses and manage your monthly budget.  
-Built with 🟦 HTML, 🟩 CSS, and 🟨 JavaScript—just open it in your favorite browser and get started.
+Welcome! This is a colorful and user-friendly Welcome! This is a colorful and user-friendly web app to help you track expenses and manage your monthly budget.  
+Built with: 🔸HTML5 | 🎨CSS3 | ⚡JavaScript | 📊 Chart.js — just open it in your favorite browser and get started.
+
+
 
 ---
 
