@@ -1,2 +1,2 @@
-# bca-first-year-projects
+# small_projects
 A collection of my first-year BCA Python, HTML, CSS and JavaScript projects. 
