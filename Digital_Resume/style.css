@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f8fa;
+  margin: 0;
+  padding: 0;
+}
+.resume-container {
+  max-width: 600px;
+  background: #fff;
+  margin: 40px auto;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px #ccc;
+}
+header {
+  border-bottom: 2px solid #dedede;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+header h1 {
+  margin: 0;
+  color: #2b6777;
+}
+section h2 {
+  color: #52ab98;
+  margin-bottom: 8px;
+}
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
