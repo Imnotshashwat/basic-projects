@@ -55,7 +55,7 @@ https://Imnotshashwat.github.io/bca-first-year-projects/expense_tracker/
 ---
 
 **Made by Shashwat**  
-[GitHub: Imnotshashwat](https://github.com/Imnotshashwat) 💬
+[GitHub](https://github.com/Imnotshashwat) 💬
 
 > If you like this project, feel free to ⭐ star it, or share ideas and feedback!
 
