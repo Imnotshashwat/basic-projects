@@ -18,10 +18,10 @@ Built with 🟦 HTML, 🟩 CSS, and 🟨 JavaScript—just open it in your favor
 
 ## 🛠️ How to Use
 
-<font color="orange">1.</font> **Set your budget** in the top bar and click "Save Budget."  
-<font color="green">2.</font> **Add expenses** with details and watch the stats change in real time.  
-<font color="blue">3.</font> **Switch between light/dark with one tap.**  
-<font color="red">4.</font> **Delete any item** easily from your history.
+<font color="orange">1.</font> Set your budget in the top bar and click "Save Budget."  
+<font color="green">2.</font> Add expenses with details and watch the stats change in real time.  
+<font color="blue">3.</font> Switch between light/dark with one tap. 
+<font color="red">4.</font> Delete any item easily from your history.
 
 ---
 
@@ -55,6 +55,8 @@ https://Imnotshashwat.github.io/bca-first-year-projects/expense_tracker/
 ---
 
 **Made by Shashwat**  
-![GitHub: Imnotshashwat](https://github.com/Imnotshashwat) 💬
+[GitHub: Imnotshashwat](https://github.com/Imnotshashwat) 💬
 
 > If you like this project, feel free to ⭐ star it, or share ideas and feedback!
+
+
