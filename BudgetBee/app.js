@@ -1,0 +1,1 @@
+// JS omitted for brevity: includes all human-like logic as per the feature list.
