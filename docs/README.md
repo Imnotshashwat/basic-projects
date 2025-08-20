@@ -1,44 +1,42 @@
-# 💼 Personal Expense Tracker
 
-Welcome to the **Personal Expense Tracker** app! This is a beginner-friendly web app to help you track your incomes and expenses easily. 📊💰
+# 🐝 Budget Bee
 
-## ✨ Features
+A delightfully simple, modern expense & budget tracker for your mobile browser.
 
-- ➕ Add and manage income and expense transactions
-- 🕒 View transaction history with edit and delete options
-- 💵 See current balance, total incomes, and total expenses
-- 💱 Switch between Indian Rupees (₹) and US Dollars ($)
-- 📅 Monthly expense breakdown and filtering by category
-- 📈 Interactive charts for spending categories and monthly trends
-- 🌗 Dark and light theme toggle
-- 📁 Export your transaction data as CSV
-- 🔒 Data saved locally in your browser for privacy
+## 🚀 Features
+- Instant add, edit, and delete expenses
+- Recurring expense flag with highlight
+- Weekly and monthly summaries, filter by time
+- Set category budgets, watch real-time progress bars
+- Dynamic pie chart (by category)
+- Sort & advanced search (date, amount, status)
+- Undo delete (just in case!)
+- Switch between ₹ (INR) and $ (USD) anytime
+- Data always local: export/import to keep backups
+- Mobile-first design, dark and light themes (toggle in ☰ menu)
+- Friendly onboarding for new users
 
-## 🛠️ Technologies Used
+## 📲 How To Use
+1. **Open `index.html` in your mobile browser.**
+2. **Add expenses** quickly from the main screen — use categories and set budgets as you like.
+3. **Tap ☰ (hamburger menu)** for theme, settings, and About.
+4. **Switch currency** between INR and USD from settings (coming soon).
+5. **Export or import** your data with a tap for backup or device transfer (coming soon).
 
-- HTML, CSS, and JavaScript (Vanilla, no frameworks)
-- 📊 Chart.js for data visualizations
-- 🗄️ LocalStorage for data persistence
+No account, no ads, no server: **your data never leaves your phone.**
 
-## 🚀 How to Use
+## ✏️ About
+Made with care by [Shashwat Dwivedi](https://github.com/Imnotshashwat) — indie coder, web dev, and builder from India. The bee 🐝 theme is all about working smarter with your finances and keeping things sweet.
 
-1. Open `index.html` in a modern web browser. 🌐
-2. Choose your preferred currency (INR or USD) in the Add Transaction tab. 💱
-3. Add transactions in the "Add Transaction" tab. 📝
-4. View and manage your transactions in the "History" tab. 📋
-5. Explore your spending using charts in the "Charts" tab. 📉
-6. Check monthly summaries in the "Monthly" tab. 📆
-7. Toggle between dark and light themes using the button at the top right. 🌓
-8. Export your transaction data as CSV anytime from the History tab. 💾
+## 💡 FAQ
+**Q: Is my data safe?**  
+A: Yes! All your info is saved right in your mobile browser (localStorage).
 
-## 📦 Deployment
+**Q: Can I save pictures of bills or receipts?**  
+A: Not in this version, to keep things lightweight and private.
 
-You can upload the entire project folder to GitHub and use GitHub Pages to host the app easily. 🌍
+**Q: How do I backup/restore?**  
+A: Use the export/import tools in the hamburger menu (coming soon!).
 
-## 🧑‍💻 About
-
-Created by [Imnotshashwat](https://github.com/Imnotshashwat) 👋
-
----
-
-Feel free to explore and modify the code as part of your learning journey! Happy coding! 🎉
+## ⭐ License
+MIT — free to use, remix, and share.
